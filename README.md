@@ -18,4 +18,17 @@ python3 -m venv .venv
 .venv/bin/pip install --no-index --find-links rag-wheels-py312 "torch>=2.6" sentence-transformers numpy
 ```
 
+## Without pip
+
+If `python3 -m venv` fails (`ensurepip is not available`) or pip is missing, use the pip wheel in this repo.
+A wheel can run pip directly without unpacking.
+
+```sh
+curl -fLO https://github.com/YoungGyuLee/rag-offline-wheels/raw/main/pip-26.3-py3-none-any.whl
+echo "f3b60b20ffaadd4415ed7957212a38ac63fa4c5fa375bd0f4a797777940fad13  pip-26.3-py3-none-any.whl" | sha256sum -c
+python3 -m venv --without-pip .venv
+.venv/bin/python pip-26.3-py3-none-any.whl/pip install --no-index pip-26.3-py3-none-any.whl
+.venv/bin/pip install --no-index --find-links rag-wheels-py312 "torch>=2.6" sentence-transformers numpy
+```
+
 Each package keeps its own license (see the wheel metadata).
